@@ -38,7 +38,11 @@ bot.command("getid", async (ctx)=>{
 })
 
 bot.command('url', async ctx => {
-  await ctx.telegram.sendDocument(ctx.chat.id,`https://static.remove.bg/remove-bg-web/6cc620ebfb5922c21227f533a09d892abd65defa/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png`)
+  const msg = ctx.text
+  let msgArray = msg.split(' ')
+  msgArray.shift()
+  let text = msgArray.join(' ')
+  await ctx.telegram.sendDocument(ctx.chat.id, text)
 })
 
 bot.run()
