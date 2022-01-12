@@ -61,7 +61,9 @@ bot.command('url', async (ctx) => {
         })
         await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
     } else if (mime.startsWith('document')) {
-        await ctx.telegram.sendDocument(ctx.chat.id,buffer)
+        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
+          fileName : filename2
+        })
         await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
     } else {
         await ctx.telegram.sendMessage(ctx.chat.id,'Type not found')
