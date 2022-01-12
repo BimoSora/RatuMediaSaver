@@ -1,7 +1,7 @@
 // index.js
 require('dotenv').config();
 const {Snake} = require("tgsnake") // mengimpor modul.
-const fileType = require('file-type');
+const FileType = require('file-type');
 const got = require('got');
 
 const bot = new Snake({
@@ -42,7 +42,7 @@ bot.command('url', async (ctx) => {
     const url = ctx.text.replace('/url', '').trim();
     if (!url.length) return ctx.telegram.sendMessage(ctx.chat.id, 'No valid url found ')
     const buffer = await got(url).buffer()
-    const { mime } = await fileType(buffer)
+    const { mime } = await FileType.fromBuffer(buffer)
     console.log(mime);
     let filename2 = ``;
     try {
