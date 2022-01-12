@@ -42,12 +42,6 @@ bot.command('url', async (ctx) => {
     if (!url.length) return ctx.telegram.sendMessage(ctx.chat.id, 'No valid url found ')
     const buffer = await got(url).buffer()
     const { mime } = await FileType.fromBuffer(buffer)
-    let filename2 = ``;
-    try {
-        filename2 = new URL(url).pathname.split('/').pop();
-    } catch (e) {
-        console.error(e);
-    }
     if (mime.startsWith('video')) {
         await ctx.telegram.sendMedia(ctx.chat.id,buffer)
         await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
