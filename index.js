@@ -53,16 +53,19 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async ctx => {
   if (mime.startsWith('video')) {
       await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
         fileName : filename2
+      }, {
       })
       await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
   } else if (mime.startsWith('image')) {
       await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
         fileName : filename2
+      }, {
       })
       await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
   } else if (mime.startsWith('application')) {
       await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
         fileName : filename2
+      }, {
       })
       await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
   } else {
