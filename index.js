@@ -39,31 +39,8 @@ bot.command("getid", async (ctx)=>{
   })
 })
 
-bot.command('url', async (ctx) => {
-    const url = ctx.text.replace('/url', '').trim();
-    if (!url.length) return ctx.telegram.sendMessage(ctx.chat.id, 'No valid url found ')
-    const buffer = await got(url).buffer()
-    const { mime } = await FileType.fromBuffer(buffer)
-    let filename2 = ``;
-    filename2 = new URL(url).pathname.split('/').pop();
-    if (mime.startsWith('video')) {
-        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-          fileName : filename2
-        })
-        await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
-    } else if (mime.startsWith('image')) {
-        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-          fileName : filename2
-        })
-        await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
-    } else if (mime.startsWith('document')) {
-        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-          fileName : filename2
-        })
-        await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
-    } else {
-        await ctx.telegram.sendMessage(ctx.chat.id,'Type not found')
-    }
+bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async ctx => {
+  console.log(ctx)
 })
 
 bot.run()
