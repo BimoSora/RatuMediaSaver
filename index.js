@@ -42,14 +42,26 @@ bot.command('url', async (ctx) => {
     if (!url.length) return ctx.telegram.sendMessage(ctx.chat.id, 'No valid url found ')
     const buffer = await got(url).buffer()
     const { mime } = await FileType.fromBuffer(buffer)
+    let filename2 = ``;
+    try {
+        filename2 = new URL(url).pathname.split('/').pop();
+    } catch (e) {
+        console.error(e);
+    }
     if (mime.startsWith('video')) {
-        await ctx.telegram.sendMedia(ctx.chat.id,buffer)
+        await ctx.telegram.sendMedia(ctx.chat.id,buffer,{
+            fileName: filename2
+        })
         await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
     } else if (mime.startsWith('image')) {
-        await ctx.telegram.sendDocument(ctx.chat.id,buffer)
+        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
+            fileName: filename2
+        })
         await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
     } else if (mime.startsWith('document')) {
-        await ctx.telegram.sendDocument(ctx.chat.id,buffer)
+        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
+            fileName: filename2
+        })
         await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
     } else {
         await ctx.telegram.sendMessage(ctx.chat.id,'Type not found')
