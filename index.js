@@ -39,7 +39,7 @@ bot.command("getid", async (ctx)=>{
 })
 
 bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async ctx => {
-  console.log(ctx)
+  console.log(ctx);
 })
 
 bot.run()
