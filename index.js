@@ -42,7 +42,7 @@ bot.command('url', async (ctx) => {
     const url = ctx.text.replace('/url', '').trim();
     if (!url.length) return ctx.telegram.sendMessage(ctx.chat.id, 'No valid url found ')
     const buffer = await got(url).buffer()
-    const { mime } = await fileType.fromBuffer(buffer)
+    const { mime } = await fileType(buffer)
     console.log(mime);
     let filename2 = ``;
     try {
