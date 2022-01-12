@@ -39,7 +39,8 @@ bot.command("getid", async (ctx)=>{
   })
 })
 
-bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async ctx => {
+bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => {
+  console.log(ctx);
   const url = ctx.text.replace('/url', '').trim();
   if (!url.length) return ctx.telegram.sendMessage(ctx.chat.id, 'No valid url found ')
   const buffer = await got(url).buffer()
