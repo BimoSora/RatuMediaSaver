@@ -49,11 +49,11 @@ bot.command('url', async ctx => {
         console.error(e);
     }
     if (mime.startsWith('video')) {
-      await ctx.telegram.sendVideo({
-          source: buffer,
-          fileName: `${filename2}`
-      }, {
-      })
+        await ctx.telegram.sendVideo({
+            source: buffer,
+            fileName: `${filename2}`
+        }, {
+        })
       await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
     } else if (mime.startsWith('image')) {
         await ctx.telegram.sendDocument({
@@ -79,6 +79,6 @@ const domain = `${process.env.DOMAIN}.herokuapp.com`
 bot.run({
     webhook:{
         domain:domain,
-        port:Number(process.env.PORT) 
+        port:Number(process.env.PORT || 3000) 
     }
 })
