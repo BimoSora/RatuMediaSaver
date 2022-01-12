@@ -38,37 +38,7 @@ bot.command("getid", async (ctx)=>{
 })
 
 bot.command('url', async ctx => {
-    const url = ctx.text.replace('/url', '').trim();
-    if (!url.length) return ctx.telegram.sendMessage(ctx.chat.id, 'No valid url found ')
-    const buffer = await got(url).buffer()
-    const { mime } = await FileType.fromBuffer(buffer)
-    let filename2 = ``;
-    try {
-        filename2 = new URL(url).pathname.split('/').pop();
-    } catch (e) {
-        console.error(e);
-    }
-    if (mime.startsWith('video')) {
-        await ctx.telegram.sendVideo(ctx.chat.id,buffer,{
-            fileName: `${filename2}`
-        }, {
-        })
-      await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
-    } else if (mime.startsWith('image')) {
-        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-            fileName: `${filename2}`
-        }, {
-        })
-        await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
-    } else if (mime.startsWith('document')) {
-        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-            fileName: `${filename2}`
-        }, {
-        })
-        await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
-    } else {
-        await ctx.telegram.sendMessage(ctx.chat.id,'Type not found')
-    }
+  await ctx.telegram.sendDocument(ctx.chat.id,`https://static.remove.bg/remove-bg-web/6cc620ebfb5922c21227f533a09d892abd65defa/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png`)
 })
 
 bot.run()
