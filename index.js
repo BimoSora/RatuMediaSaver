@@ -60,7 +60,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async ctx => {
         fileName : filename2
       })
       await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
-  } else if (mime.startsWith('document')) {
+  } else if (mime.startsWith('application')) {
       await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
         fileName : filename2
       })
