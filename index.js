@@ -38,10 +38,8 @@ bot.command("getid", async (ctx)=>{
 })
 
 bot.command('url', async ctx => {
-    const url = ctx.text.replace('/url', '').trim();
-    await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-      fileName: filename2
-    })
+  const url = ctx.text.replace('/url', '').trim();
+  await ctx.telegram.sendDocument(ctx.chat.id,url)
 })
 
 bot.run()
