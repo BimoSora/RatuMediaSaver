@@ -1,0 +1,18 @@
+{
+  "name": "filsaverobot",
+  "version": "1.0.0",
+  "description": "another way to share files",
+  "main": "index.js",
+  "dependencies": {
+    "file-type": "^16.5.3",
+    "got": "^11.8.3",
+    "tgsnake": "^2.0.0-beta.8"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": []
+}

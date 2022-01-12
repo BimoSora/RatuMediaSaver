@@ -1,0 +1,26 @@
+{
+	"name": "Ratu Media Saver",
+	"description": "Uploader telegram",
+	"repository": "https://github.com/BimoSora/RatuMediaSaver",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Heroku_logo.svg",
+	"keywords": ["telegram","filesaver","bot","nodejs"],
+	"env": {
+        "apiHash": {
+            "description": "Membuat klien baru. Anda dapat menaruh opsi di file tgsnake.config.js.",
+            "value":"4014387adad45b7b504cfaa532715244"
+        },
+        "apiId": {
+            "description": "Dapatkan dari my.telegram.org",
+            "value":"14402011"
+        },
+        "botToken": {
+            "description": "Jika anda ingin login dengan akun anda, hapus ini dan buat sesi terlebih dahulu. lalu tempel sesi anda di bidang session.",
+            "value":"1983650207:AAEUx1Q5_I0jiC8WZZXiO6saZc_H55OGJ44"
+        }
+    },
+	"buildpacks": [
+		{
+			"url": "heroku/nodejs"
+		}
+	]
+}
