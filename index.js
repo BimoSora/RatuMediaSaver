@@ -73,7 +73,7 @@ bot.command('url', async ctx => {
 
 //heroku config
 const domain = `${process.env.DOMAIN}.herokuapp.com`
-const PORT = 3000
+const PORT = 5000
 bot.run({
     webhook:{
         domain:domain,
