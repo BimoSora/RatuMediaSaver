@@ -49,19 +49,13 @@ bot.command('url', async (ctx) => {
         console.error(e);
     }
     if (mime.startsWith('video')) {
-        await ctx.telegram.sendMedia(ctx.chat.id,buffer,{
-            fileName: filename2
-        })
+        await ctx.telegram.sendMedia(ctx.chat.id,buffer)
         await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
     } else if (mime.startsWith('image')) {
-        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-            fileName: filename2
-        })
+        await ctx.telegram.sendDocument(ctx.chat.id,buffer)
         await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
     } else if (mime.startsWith('document')) {
-        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-            fileName: filename2
-        })
+        await ctx.telegram.sendDocument(ctx.chat.id,buffer)
         await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
     } else {
         await ctx.telegram.sendMessage(ctx.chat.id,'Type not found')
