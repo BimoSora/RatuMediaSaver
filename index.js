@@ -38,11 +38,10 @@ bot.command("getid", async (ctx)=>{
 })
 
 bot.command('url', async ctx => {
-  const msg = ctx.text
-  let msgArray = msg.split(' ')
-  msgArray.shift()
-  let text = msgArray.join(' ')
-  await ctx.telegram.sendDocument(ctx.chat.id, text)
+    const url = ctx.text.replace('/url', '').trim();
+    await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
+      fileName: filename2
+    })
 })
 
 bot.run()
