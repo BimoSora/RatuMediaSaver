@@ -39,17 +39,23 @@ bot.command("getid", async (ctx)=>{
 })
 
 bot.command('url', async (ctx) => {
+    console.log(ctx);
     const url = ctx.text.replace('/url', '').trim();
     if (!url.length) return ctx.telegram.sendMessage(ctx.chat.id, 'No valid url found ')
+    console.log(url);
     const buffer = await got(url).buffer()
+    console.log(buffer);
     const { mime } = await FileType.fromBuffer(buffer)
     console.log(mime);
+    
     let filename2 = ``;
     try {
         filename2 = new URL(url).pathname.split('/').pop();
     } catch (e) {
         console.error(e);
     }
+    console.log(filename2);
+
     if (mime.startsWith('video')) {
         await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
           fileName : filename2
