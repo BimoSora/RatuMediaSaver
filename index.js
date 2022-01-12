@@ -8,6 +8,7 @@ const bot = new Snake({
   apiHash : `${process.env.apiHash}`,
   apiId : `${process.env.apiId}`,
   botToken : `${process.env.botToken}`,
+  tgSnakeLog : true,
   logger: `info`
 })
 
