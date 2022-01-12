@@ -7,7 +7,8 @@ const got = require('got');
 const bot = new Snake({
   apiHash : `${process.env.apiHash}`,
   apiId : `${process.env.apiId}`,
-  botToken : `${process.env.botToken}`
+  botToken : `${process.env.botToken}`,
+  logger: `info`
 })
 
 //Function
@@ -41,7 +42,9 @@ bot.command('url', async (ctx) => {
     const url = ctx.text.replace('/url', '').trim();
     if (!url.length) return ctx.telegram.sendMessage(ctx.chat.id, 'No valid url found ')
     const buffer = await got(url).buffer()
-    const { mime } = await FileType.fromBuffer(buffer)
+    const { ext, mime } = await FileType.fromBuffer(buffer)
+    console.log(ext);
+    console.log(mime);
     let filename2 = ``;
     try {
         filename2 = new URL(url).pathname.split('/').pop();
