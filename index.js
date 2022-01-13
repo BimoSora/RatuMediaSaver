@@ -60,7 +60,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
         })
         await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
     } else {
-        await ctx.telegram.sendMessage(ctx.chat.id,'Type not found')
+        await ctx.telegram.sendMessage(ctx.chat.id,'File type not allowed')
     }
   }
 })
