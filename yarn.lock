@@ -979,6 +979,21 @@ tg-file-id@1.1.2:
   resolved "https://registry.npmjs.org/tg-file-id/-/tg-file-id-1.1.2.tgz"
   integrity sha512-CP82EimaqVzI5ww7apIAOPkaKCx4kfAK11MPOw4YT7HXr9rbbPKWOIyIQV6dDUH2jBVM3lHDShXFS98u5+ABdQ==
 
+tgsnake@./tgsnake-dev-build.tgz:
+  version "2.0.0-beta.9"
+  resolved "./tgsnake-dev-build.tgz#f46ecd9ced154c9e0d3ad6f6587faa3f89027f7f"
+  dependencies:
+    "@tgsnake/parser" "1.1.0"
+    axios "0.24.0"
+    big-integer "1.6.51"
+    chalk "4.1.2"
+    file-type "16.5.3"
+    husky "7.0.4"
+    prompts "2.4.2"
+    telegram "2.2.3"
+    tg-file-id "1.1.2"
+    util "^0.12.4"
+
 tgsnake@^2.0.0-beta.9:
   version "2.0.0-beta.9"
   resolved "https://registry.yarnpkg.com/tgsnake/-/tgsnake-2.0.0-beta.9.tgz#793034919b4f9a6ce3b2a70f583568f3f86cb937"
