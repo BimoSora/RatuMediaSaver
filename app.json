@@ -18,7 +18,7 @@
             "value":""
         },
         "ADMIN": {
-            "description": "Jika anda ingin login dengan akun anda, hapus ini dan buat sesi terlebih dahulu. lalu tempel sesi anda di bidang session.",
+            "description": "Isi dengan USER ID akun yang akan di jadikan admin.",
             "value":""
         }
     },
