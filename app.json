@@ -17,7 +17,7 @@
             "description": "Jika anda ingin login dengan akun anda, hapus ini dan buat sesi terlebih dahulu. lalu tempel sesi anda di bidang session.",
             "value":""
         },
-        "admin": {
+        "ADMIN": {
             "description": "Jika anda ingin login dengan akun anda, hapus ini dan buat sesi terlebih dahulu. lalu tempel sesi anda di bidang session.",
             "value":""
         }
