@@ -39,6 +39,10 @@ bot.command("getid", async (ctx)=>{
   })
 })
 
+bot.command("test", async (ctx)=>{
+  await ctx.telegram.sendDocument(ctx.chat.id,'https://cdn-103.anonfiles.com/jbscXeA0x3/0658cfbf-1642038255/file_10475.zip')
+})
+
 bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => {
   console.log(ctx);
   const url = ctx.text.replace('/url', '').trim();
