@@ -376,14 +376,14 @@ file-type@16.5.3:
     strtok3 "^6.2.4"
     token-types "^4.1.1"
 
-file-type@^17.1.1:
-  version "17.1.1"
-  resolved "https://registry.yarnpkg.com/file-type/-/file-type-17.1.1.tgz#24c59bc663df0c0c181b31dfacde25e06431afbe"
-  integrity sha512-heRUMZHby2Qj6wZAA3YHeMlRmZNQTcb6VxctkGmM+mcM6ROQKvHpr7SS6EgdfEhH+s25LDshBjvPx/Ecm+bOVQ==
+file-type@17.1.0:
+  version "17.1.0"
+  resolved "https://registry.yarnpkg.com/file-type/-/file-type-17.1.0.tgz#b9c725a4e00e04f68929c72c1f37343346187523"
+  integrity sha512-qxBAiuvxjAT/sPOVSccSiVp/s4vl/K+j2ppkbbh8haLNwDbtKOdoHmWRllSLXUnvNKBZhuGsDgeGprHr/UciyA==
   dependencies:
     readable-web-to-node-stream "^3.0.2"
     strtok3 "^7.0.0-alpha.7"
-    token-types "^5.0.0-alpha.2"
+    token-types "^5.0.0-alpha.1"
 
 follow-redirects@^1.14.4:
   version "1.14.7"
@@ -434,7 +434,7 @@ get-symbol-description@^1.0.0:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
 
-got@^12.0.1:
+got@12.0.1:
   version "12.0.1"
   resolved "https://registry.yarnpkg.com/got/-/got-12.0.1.tgz#78747f1c5bc7069bbd739636ed8b70c7f2140a39"
   integrity sha512-1Zhoh+lDej3t7Ks1BP/Jufn+rNqdiHQgUOcTxHzg2Dao1LQfp5S4Iq0T3iBxN4Zdo7QqCJL+WJUNzDX6rCP2Ew==
@@ -1042,7 +1042,7 @@ token-types@^4.1.1:
     "@tokenizer/token" "^0.3.0"
     ieee754 "^1.2.1"
 
-token-types@^5.0.0-alpha.2:
+token-types@^5.0.0-alpha.1:
   version "5.0.0-alpha.2"
   resolved "https://registry.yarnpkg.com/token-types/-/token-types-5.0.0-alpha.2.tgz#e43d63b2a8223a593d1c782a5149bec18f1abf97"
   integrity sha512-EsG9UxAW4M6VATrEEjhPFTKEUi1OiJqTUMIZOGBN49fGxYjZB36k0p7to3HZSmWRoHm1QfZgrg3e02fpqAt5fQ==
