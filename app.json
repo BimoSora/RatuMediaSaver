@@ -7,15 +7,19 @@
 	"env": {
         "apiHash": {
             "description": "Membuat klien baru. Anda dapat menaruh opsi di file tgsnake.config.js.",
-            "value":"4014387adad45b7b504cfaa532715244"
+            "value":""
         },
         "apiId": {
             "description": "Dapatkan dari my.telegram.org",
-            "value":"14402011"
+            "value":""
         },
         "botToken": {
             "description": "Jika anda ingin login dengan akun anda, hapus ini dan buat sesi terlebih dahulu. lalu tempel sesi anda di bidang session.",
-            "value":"1983650207:AAEUx1Q5_I0jiC8WZZXiO6saZc_H55OGJ44"
+            "value":""
+        },
+        "admin": {
+            "description": "Jika anda ingin login dengan akun anda, hapus ini dan buat sesi terlebih dahulu. lalu tempel sesi anda di bidang session.",
+            "value":""
         }
     },
 	"buildpacks": [

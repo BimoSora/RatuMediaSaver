@@ -27,50 +27,41 @@ function fromid(ctx){
 }
 
 // bot.generateSession() // aktifkan ini untuk menghasilkan sesi dan nonaktifkan bot.run().
-bot.command("start", async (ctx)=>{
-  await ctx.telegram.sendMessage(ctx.chat.id, "Selamat datang, bot akan memberikan file yang anda berikan.")
-})
-
-//check account
-bot.command("getid", async (ctx)=>{
-  //let results = await ctx.telegram.getUserPhotos(ctx.chat.id)
-  await ctx.telegram.sendMessage(ctx.chat.id,`<b>Name:</b> <a href="tg://user?id=${ctx.from.id}">${first_name(ctx)} ${last_name(ctx)}</a>\n<b>Username:</b> ${username(ctx)}\n<b>ID:</b> ${ctx.from.id}`,{
-    parseMode:'HTML'
-  })
-})
 
 bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => {
-  console.log(ctx);
-  const url = ctx.text.replace('/url', '').trim();
-  if (!url.length) return ctx.telegram.sendMessage(ctx.chat.id, 'No valid url found ')
-  const buffer = await got(url).buffer()
-  const { mime } = await FileType.fromBuffer(buffer)
-  let filename2 = ``;
-  try {
-    filename2 = new URL(url).pathname.split('/').pop();
-  } catch (e) {
-      console.error(e);
-  }
-  if (mime.startsWith('video')) {
-      await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-        fileName : filename2
-      }, {
-      })
-      await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
-  } else if (mime.startsWith('image')) {
-      await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-        fileName : filename2
-      }, {
-      })
-      await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
-  } else if (mime.startsWith('application')) {
-      await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-        fileName : filename2
-      }, {
-      })
-      await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
-  } else {
-      await ctx.telegram.sendMessage(ctx.chat.id,'Type not found')
+  if(ctx.from.id == Number(process.env.ADMIN) || ctx.from.id == Number(process.env.ADMIN1) || ctx.from.id == Number(process.env.ADMIN2) || ctx.from.id == Number(process.env.ADMIN3) || ctx.from.id == Number(process.env.ADMIN4)){
+    const url = ctx.text.replace('/url', '').trim();
+    if (!url.length) return ctx.telegram.sendMessage(ctx.chat.id, 'No valid url found ')
+    await ctx.telegram.sendMessage(ctx.chat.id,'Upload start')
+    const buffer = await got(url).buffer()
+    const { mime } = await FileType.fromBuffer(buffer)
+    let filename2 = ``;
+    try {
+      filename2 = new URL(url).pathname.split('/').pop();
+    } catch (e) {
+        console.error(e);
+    }
+    if (mime.startsWith('video')) {
+        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
+          fileName : filename2
+        }, {
+        })
+        await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
+    } else if (mime.startsWith('image')) {
+        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
+          fileName : filename2
+        }, {
+        })
+        await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
+    } else if (mime.startsWith('application')) {
+        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
+          fileName : filename2
+        }, {
+        })
+        await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
+    } else {
+        await ctx.telegram.sendMessage(ctx.chat.id,'Type not found')
+    }
   }
 })
 
