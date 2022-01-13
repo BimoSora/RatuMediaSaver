@@ -7,7 +7,7 @@
     "dotenv": "^11.0.0",
     "file-type": "^16.5.3",
     "got": "^11.8.3",
-    "tgsnake": "^2.0.0-beta.8"
+    "tgsnake": "./tgsnake-dev-build.tgz"
   },
   "scripts": {
     "start": "node index.js",
