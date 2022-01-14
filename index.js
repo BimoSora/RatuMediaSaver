@@ -34,34 +34,22 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
     if (!url.length) return ctx.telegram.sendMessage(ctx.chat.id, 'No valid url found ')
     await ctx.telegram.sendMessage(ctx.chat.id,'Upload start')
     const buffer = await got(url).buffer()
-    const { mime } = await FileType.fromBuffer(buffer)
+    const {ext, mime } = await FileType.fromBuffer(buffer)
     let filename2 = ``;
     try {
       filename2 = new URL(url).pathname.split('/').pop();
     } catch (e) {
         console.error(e);
     }
-    if (mime.startsWith('video')) {
+    const allowedFileFormats = ['mp4', 'mp3', 'rar', '7z', 'zip', 'png', 'jpeg', 'jpg', 'gif']
+    if (allowedFileFormats.includes(ext)) {
         await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
           fileName : filename2
-        }, {
         })
         await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
-    } else if (mime.startsWith('image')) {
-        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-          fileName : filename2
-        }, {
-        })
-        await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
-    } else if (mime.startsWith('application')) {
-        await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-          fileName : filename2
-        }, {
-        })
-        await ctx.telegram.sendMessage(ctx.chat.id,'Upload successful')
-    } else {
-        await ctx.telegram.sendMessage(ctx.chat.id,'File type not allowed')
-    }
+     } else {
+        ctx.reply('File type not allowed')
+     }
   }
 })
 
