@@ -75,8 +75,8 @@ bot.command('yt', (ctx) => {
   }else if(args[2] && !allowed_qualities.includes(args[2])){
     ctx.telegram.sendMessage(ctx.chat.id,"Invalid quality settings chosen , video will be downloaded with highest possible quality",{ reply_to_message_id: message_id , parse_mode: 'Markdown'})
   }
-  if(ctx.message.from.username == undefined){
-     mention = ctx.message.from.first_name
+  if(ctx.from.username == undefined){
+     mention = ctx.from.first_name
   }
   try{
     youtubedl(url, {
