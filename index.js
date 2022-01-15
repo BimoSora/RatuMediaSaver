@@ -63,7 +63,7 @@ bot.command('youtube', async (ctx) => {
   const text = ctx.text;
   const chatId = ctx.chat.id;
   let textArray = text.split(' ')
-  msgArray.shift();
+  textArray.shift();
   let text2 = textArray.join(' ')
 
   console.log('Test video sending');
