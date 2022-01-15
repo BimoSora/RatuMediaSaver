@@ -63,7 +63,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
 bot.command('yt', (ctx) => {
   console.log(ctx)
   let message_id = ctx.id;
-  let args =  ctx.UpdateNewMessage.split(' ');
+  let args =  ctx.text.split(' ');
   let url = args[1];
   let mention = `@${ctx.from.username}`;
   var dq = "2160";
