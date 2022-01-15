@@ -36,9 +36,9 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
     var regex3 = /\.[A-Za-z0-9]+$/gm
     var doctext3 = filename.replace(regex3, '');
     var doctext4 = filename.replace(regex3, 'null');
-    
+
     if(doctext3 == doctext4){
-      console.log(`Exstension not found`);
+      await ctx.telegram.sendMessage(ctx.chat.id,`Exstension not found`)
     }else{
       await ctx.telegram.sendMessage(ctx.chat.id,`Upload start!`)
       const buffer = []
