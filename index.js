@@ -49,7 +49,11 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
       .on('data', chunk => buffer.push(chunk))
       .on('end', async () => {
         await ctx.telegram.sendMedia(ctx.chat.id,Buffer.concat(buffer),{
-          Api.TypeInputMedia : InputMediaDocument,
+          media = [
+            _ : InputMediaUploadedDocument,
+            file : 'faust.jpg'
+          ],
+          caption : '[This is the caption](https://t.me/MadelineProto)',
           fileName : filename
         })
         await ctx.telegram.sendMessage(ctx.chat.id,`Name: ${filename}`)
