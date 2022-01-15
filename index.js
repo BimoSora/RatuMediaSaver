@@ -60,6 +60,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
 })
 
 bot.command('yt', (ctx) => {
+  console.log(ctx)
   let message_id = ctx.message_id;
   let args =  ctx.update.text.split(' ');
   let url = args[1];
