@@ -34,7 +34,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
     const filename = url.split('/').pop()
     await ctx.telegram.sendMessage(ctx.chat.id,`Upload start!`)
     const buffer = []
-    const stream = got(url).stream()
+    const stream = got.stream(url)
     stream
     .on('error', () => ctx.sendMessage(chatId, 'An error has occurred'))
     .on('progress', p => console.log(p))
