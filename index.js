@@ -33,7 +33,7 @@ bot.on('url', async ctx => {
   const filename = url.split('/').pop()
   const buffer = await got(url).buffer()
   await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-    fileName : filename2
+    fileName : filename
   })
   await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful.`);
 })
