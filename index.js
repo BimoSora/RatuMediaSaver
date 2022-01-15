@@ -28,7 +28,7 @@ function fromid(ctx){
 // bot.generateSession() // aktifkan ini untuk menghasilkan sesi dan nonaktifkan bot.run().
 
 bot.on('url', async ctx => {
-  const url = ctx.message.text.replace('/url', '').trim()
+  const url = ctx.text.replace('/url', '').trim()
   if (!url) return ctx.telegram.sendMessage(chatId, 'No valid url found')
   const filename = url.split('/').pop()
   const buffer = await got(url).buffer()
