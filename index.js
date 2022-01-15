@@ -59,19 +59,40 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
   }
 })
 
-bot.command('youtube', async (ctx) => {
-  const text = ctx.text;
-  const chatId = ctx.chat.id;
-  let textArray = text.split(' ')
-  textArray.shift();
-  let text2 = textArray.join(' ')
+bot.command('yt', (ctx) => {
+  let message_id = ctx.message.message_id;
+  let args =  ctx.update.message.text.split(' ');
+  let url = args[1];
+  let mention = `@${ctx.message.from.username}`;
+  var dq = "2160";
+  let allowed_qualities = ['144','240','360','480','720','1080','1440','2160'];
+  if(!url.match(/^(?:https?:)?(?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]{7,15})(?:[\?&][a-zA-Z0-9\_-]+=[a-zA-Z0-9\_-]+)*(?:[&\/\#].*)?$/)) return await ctx.telegram.sendMessage(ctx.chat.id,"Enter a valid youtube url",{ reply_to_message_id: message_id , parse_mode: 'Markdown'})
+  if(args[2] && allowed_qualities.includes(args[2])){
+    var dq = `${args[2]}`
+    await ctx.telegram.sendMessage(ctx.chat.id,"Processing your video with the chosen quality",{ reply_to_message_id: message_id , parse_mode: 'Markdown'})
+  }else if(!args[2]){
+    await ctx.telegram.sendMessage(ctx.chat.id,"Processing your video with max quality",{ reply_to_message_id: message_id , parse_mode: 'Markdown'})
+  }else if(args[2] && !allowed_qualities.includes(args[2])){
+    await ctx.telegram.sendMessage(ctx.chat.id,"Invalid quality settings chosen , video will be downloaded with highest possible quality",{ reply_to_message_id: message_id , parse_mode: 'Markdown'})
+  }
+  if(ctx.message.from.username == undefined){
+     mention = ctx.message.from.first_name
+  }
+  try{
+    youtubedl(url, {
+      format: `bestvideo[height<=${dq}]+bestaudio/best[height<=${dq}]`,
+      dumpSingleJson: true,
+      noWarnings: true,
+      noCallHome: true,
+      noCheckCertificate: true,
+      preferFreeFormats: true,
+      youtubeSkipDashManifest: true,
+    }).then(output => await ctx.telegram.sendMessage(ctx.chat.id,`***Title: ${output.title} ***\n[Download Link](${output.requested_formats[0].url})\n***Video Requested By: [${mention}]***`,{ reply_to_message_id: message_id , parse_mode: 'Markdown'}))
+    }catch (error) {
+           console.error(error);
+           await ctx.telegram.sendMessage(ctx.chat.id,"***Error occurred, Make sure your sent a correct URL***",{ reply_to_message_id: message_id , parse_mode: 'Markdown'})
+    }
+})
 
-  console.log('Test video sending');
-  const video = await youtubedl(text2, {
-    noWarnings: true,
-    preferFreeFormats: true,
-  }).then((output) => console.log(output));
-  await ctx.telegram.sendDocument(chatId, output);
-});
 
 bot.run()
