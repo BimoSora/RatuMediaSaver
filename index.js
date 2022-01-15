@@ -46,7 +46,8 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
       stream
       .on("downloadProgress", ({ transferred, total, percent }) => {
         const percentage = Math.round(percent * 100);
-        console.error(`progress: ${transferred}/${total} (${percentage}%)`);
+        const pesan = await ctx.telegram.sendMessage(ctx.chat.id,`progress: ${transferred}/${total} (${percentage}%)`)
+        await ctx.telegram.editMessage(ctx.chat.id,pesan.ctx.telegram.message_id,`progress: ${transferred}/${total} (${percentage}%)`)
       })
       .on('error', () => ctx.telegram.sendMessage(ctx.chat.id, 'An error has occurred'))
       .on('data', chunk => buffer.push(chunk))
