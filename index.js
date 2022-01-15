@@ -36,7 +36,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
     const buffer = []
     const stream = got.stream(url)
     stream
-    .on('error', () => ctx.sendMessage(ctx.chat.id, 'An error has occurred'))
+    .on('error', () => ctx.telegram.sendMessage(ctx.chat.id, 'An error has occurred'))
     .on('progress', p => console.log(p))
     .on('data', chunk => buffer.push(chunk))
     .on('end', async () => {
