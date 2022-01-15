@@ -2,6 +2,7 @@
 require('dotenv').config();
 const {Snake} = require("tgsnake");
 const got = require('got');
+const youtubedl = require('youtube-dl-exec');
 
 const bot = new Snake({
   apiHash : `${process.env.apiHash}`,
@@ -57,5 +58,20 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
     }
   }
 })
+
+bot.on("youtube", async (ctx) => {
+  const text = ctx.text;
+  const chatId = ctx.chat.id;
+  const mode = "youtube";
+
+  if (mode === "youtube") {
+    console.log("Test video sending");
+    const video = await youtubedl(text, {
+      noWarnings: true,
+      preferFreeFormats: true,
+    }).then((output) => console.log(output));
+    await ctx.telegram.sendDocument(chatId, output);
+  }
+});
 
 bot.run()
