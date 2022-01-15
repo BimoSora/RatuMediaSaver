@@ -30,14 +30,21 @@ function fromid(ctx){
 bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => {
   if(ctx.from.id == Number(process.env.ADMIN) || ctx.from.id == Number(process.env.ADMIN1) || ctx.from.id == Number(process.env.ADMIN2) || ctx.from.id == Number(process.env.ADMIN3) || ctx.from.id == Number(process.env.ADMIN4)){
     const url = ctx.text.replace('/url', '').trim()
-    if (!url) return ctx.telegram.sendMessage(chatId, 'No valid url found')
+    //if (!url) return ctx.telegram.sendMessage(chatId, 'No valid url found')
     const filename = url.split('/').pop()
     await ctx.telegram.sendMessage(ctx.chat.id,`Upload start!`)
-    const buffer = await got(url).buffer()
-    await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
-      fileName : filename
+    const buffer = []
+    const stream = got(url).stream()
+    stream
+    .on('error', () => ctx.sendMessage(chatId, 'An error has occurred'))
+    .on('progress', p => console.log(p))
+    .on('data', chunk => buffer.push(chunk))
+    .on('end', async () => {
+      await ctx.telegram.sendDocument(chatId, Buffer.concat(buffer),{
+        fileName : filename
+      })
+      await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
     })
-    await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
   }
 })
 
