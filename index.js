@@ -49,8 +49,9 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
       .on('data', chunk => buffer.push(chunk))
       .on('end', async () => {
         await ctx.telegram.sendDocument(ctx.chat.id,Buffer.concat(buffer),{
-          caption : `Name: ${filename}`,
           fileName : filename
+        },{
+          caption : `Name: ${filename}`
         })
         await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
       })
