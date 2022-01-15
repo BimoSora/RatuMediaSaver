@@ -44,10 +44,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
       const buffer = []
       const stream = got.stream(url)
       stream
-      .on("downloadProgress", ({ transferred, total, percent }) => {
-        const percentage = Math.round(percent * 100);
-        console.error(`progress: ${transferred}/${total} (${percentage}%)`);
-      })
+      .on('progress', p => console.log(p))
       .on('error', () => ctx.telegram.sendMessage(ctx.chat.id, 'An error has occurred'))
       .on('data', chunk => buffer.push(chunk))
       .on('end', async () => {
