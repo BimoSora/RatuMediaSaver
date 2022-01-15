@@ -59,12 +59,15 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
   }
 })
 
-bot.on('youtube', async (ctx) => {
+bot.command('youtube', async (ctx) => {
   const text = ctx.text;
   const chatId = ctx.chat.id;
+  let textArray = text.split(' ')
+  msgArray.shift();
+  let text2 = textArray.join(' ')
 
   console.log('Test video sending');
-  const video = await youtubedl(text, {
+  const video = await youtubedl(text2, {
     noWarnings: true,
     preferFreeFormats: true,
   }).then((output) => console.log(output));
