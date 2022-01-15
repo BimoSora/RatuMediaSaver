@@ -1,7 +1,6 @@
 // index.js
 require('dotenv').config();
-const {Snake,GramJs} = require("tgsnake");
-const Api = GramJs.Api
+const {Snake} = require("tgsnake");
 const got = require('got');
 
 const youtubedl = require('youtube-dl-exec');
