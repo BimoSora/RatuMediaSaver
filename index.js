@@ -59,7 +59,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
   }
 })
 
-bot.command('yt', (ctx) => {
+bot.command('yt', async(ctx) => {
   let message_id = ctx.message.message_id;
   let args =  ctx.update.message.text.split(' ');
   let url = args[1];
