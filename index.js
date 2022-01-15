@@ -2,7 +2,6 @@
 require('dotenv').config();
 const {Snake} = require("tgsnake");
 const got = require('got');
-const config = require('./process.env.js');
 
 const bot = new Snake({
   apiHash : `${process.env.apiHash}`,
