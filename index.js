@@ -32,12 +32,12 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
     const url = ctx.text.replace('/url', '').trim()
     if (!url) return ctx.telegram.sendMessage(chatId, 'No valid url found')
     const filename = url.split('/').pop()
+    await ctx.telegram.sendMessage(ctx.chat.id,`Upload start!`)
     const buffer = await got(url).buffer()
-    await ctx.telegram.sendMessage(ctx.chat.id,`Upload start.`)
     await ctx.telegram.sendDocument(ctx.chat.id,buffer,{
       fileName : filename
     })
-    await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful.`)
+    await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
   }
 })
 
