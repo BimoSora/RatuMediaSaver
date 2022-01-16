@@ -89,7 +89,7 @@ bot.command('yt', (ctx) => {
       noCheckCertificate: true,
       preferFreeFormats: true,
       youtubeSkipDashManifest: true,
-    }).then(output => {
+    }).then(async output => {
         await ctx.telegram.sendMessage(ctx.chat.id,`Upload start!`)
         const buffer = []
         const stream = got.stream(output.requested_formats[0].url)
@@ -99,7 +99,7 @@ bot.command('yt', (ctx) => {
         .on('data', chunk => buffer.push(chunk))
         .on('end', async () => {
           await ctx.telegram.sendDocument(ctx.chat.id,Buffer.concat(buffer),{
-            fileName : filename
+            fileName : filename.mp4
           })
           await ctx.telegram.sendMessage(ctx.chat.id,`Name: ${filename}`)
           await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
