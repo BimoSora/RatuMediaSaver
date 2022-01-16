@@ -44,11 +44,11 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
       if(!url.match(/^(?:https?:)?(?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]{7,15})(?:[\?&][a-zA-Z0-9\_-]+=[a-zA-Z0-9\_-]+)*(?:[&\/\#].*)?$/)) return ctx.telegram.sendMessage(ctx.chat.id,'Enter a valid youtube url',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
       if(args[2] && allowed_qualities.includes(args[2])){
         var dq = `${args[2]}`
-        ctx.telegram.sendMessage(ctx.chat.id,'Processing your video with the chosen quality',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
+        await ctx.telegram.sendMessage(ctx.chat.id,'Processing your video with the chosen quality',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
       }else if(!args[2]){
-        ctx.telegram.sendMessage(ctx.chat.id,'Processing your video with max quality',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
+        await ctx.telegram.sendMessage(ctx.chat.id,'Processing your video with max quality',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
       }else if(args[2] && !allowed_qualities.includes(args[2])){
-        ctx.telegram.sendMessage(ctx.chat.id,'Invalid quality settings chosen , video will be downloaded with highest possible quality',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
+        await ctx.telegram.sendMessage(ctx.chat.id,'Invalid quality settings chosen , video will be downloaded with highest possible quality',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
       }
       if(ctx.from.username == undefined){
         mention = ctx.from.first_name
@@ -97,7 +97,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
         if(doctext3 == doctext4){
           await ctx.telegram.sendMessage(ctx.chat.id,`Exstension not found`,{ replyToMsgId: message_id , parse_mode: 'Markdown'})
         }else{
-          ctx.telegram.sendMessage(ctx.chat.id,'Processing your file',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
+          await ctx.telegram.sendMessage(ctx.chat.id,'Processing your file',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
           await ctx.telegram.sendMessage(ctx.chat.id,`Upload start!`)
           const buffer = []
           const stream = got.stream(url)
