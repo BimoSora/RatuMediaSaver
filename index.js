@@ -33,9 +33,10 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
     const url = ctx.text.replace('/url', '').trim();
     const regex = /youtube.com|youtu.be/g;
     const found = url.match(regex);
+
+    let message_id = ctx.id;
     
     if (found == 'youtube.com' || found == 'youtu.be'){
-      let message_id = ctx.id;
       let args =  ctx.text.split(' ');
       let url = args[1];
       let mention = `@${ctx.from.username}`;
