@@ -90,7 +90,7 @@ bot.command('yt', (ctx) => {
       preferFreeFormats: true,
       youtubeSkipDashManifest: true,
     }).then(async output => {
-        const filename = `videoplayback.webm`
+        const filename = `videoplayback.mp4`
         await ctx.telegram.sendMessage(ctx.chat.id,`Upload start!`)
         const buffer = []
         const stream = got.stream(output.requested_formats[0].url)
