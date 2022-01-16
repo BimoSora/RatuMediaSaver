@@ -89,20 +89,21 @@ bot.command('yt', (ctx) => {
       noCheckCertificate: true,
       preferFreeFormats: true,
       youtubeSkipDashManifest: true,
-    }).then(output => 
-      await ctx.telegram.sendMessage(ctx.chat.id,`Upload start!`)
-      const buffer = []
-      const stream = got.stream(output.requested_formats[0].url})
-      stream
-      .on('error', () => ctx.telegram.sendMessage(ctx.chat.id, 'An error has occurred'))
-      .on('progress', p => console.log(p))
-      .on('data', chunk => buffer.push(chunk))
-      .on('end', async () => {
-        await ctx.telegram.sendDocument(ctx.chat.id,Buffer.concat(buffer),{
-          fileName : filename.mp4
+    }).then(output => {
+        await ctx.telegram.sendMessage(ctx.chat.id,`Upload start!`)
+        const buffer = []
+        const stream = got.stream(output.requested_formats[0].url)
+        stream
+        .on('error', () => ctx.telegram.sendMessage(ctx.chat.id, 'An error has occurred'))
+        .on('progress', p => console.log(p))
+        .on('data', chunk => buffer.push(chunk))
+        .on('end', async () => {
+          await ctx.telegram.sendDocument(ctx.chat.id,Buffer.concat(buffer),{
+            fileName : filename
+          })
+          await ctx.telegram.sendMessage(ctx.chat.id,`Name: ${filename}`)
+          await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
         })
-        await ctx.telegram.sendMessage(ctx.chat.id,`Name: ${filename}`)
-        await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
       })
     }catch (error) {
           console.error(error);
