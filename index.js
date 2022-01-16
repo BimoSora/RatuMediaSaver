@@ -83,8 +83,6 @@ bot.command('yt', (ctx) => {
   try{
     youtubedl(url, {
       format: `bestvideo[height<=${dq}]+bestaudio/best[height<=${dq}]`,
-      getTitle: true,
-      getThumbnail: true,
       dumpSingleJson: true,
       noWarnings: true,
       noCallHome: true,
