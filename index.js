@@ -35,8 +35,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
     const regex = /saya/g;
     const found = url.match(regex);
     
-    if (found == `youtube`){
-
+    if (found == 'youtube'){
       let message_id = ctx.id;
       let args =  ctx.text.split(' ');
       let url = args[1];
