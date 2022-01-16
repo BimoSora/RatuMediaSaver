@@ -33,7 +33,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
   if(ctx.from.id == Number(process.env.ADMIN) || ctx.from.id == Number(process.env.ADMIN1) || ctx.from.id == Number(process.env.ADMIN2) || ctx.from.id == Number(process.env.ADMIN3) || ctx.from.id == Number(process.env.ADMIN4)){
     const url = ctx.text.replace('/url', '').trim()
     const regex = /saya/g;
-    const found = result.match(regex);
+    const found = url.match(regex);
     
     if (found == `youtube`){
 
