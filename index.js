@@ -28,7 +28,7 @@ function fromid(ctx){
 
 // bot.generateSession() // aktifkan ini untuk menghasilkan sesi dan nonaktifkan bot.run().
 
-bot.hears(new RegExp(`(https?:\/\/.*)`,""),async (ctx) => {
+bot.hears(new RegExp(`^(https?:\/\/.*)`,""),async (ctx) => {
   if(ctx.from.id == Number(process.env.ADMIN) || ctx.from.id == Number(process.env.ADMIN1) || ctx.from.id == Number(process.env.ADMIN2) || ctx.from.id == Number(process.env.ADMIN3) || ctx.from.id == Number(process.env.ADMIN4)){
     const url = ctx.text;
     const regex = /youtube.com|youtu.be/g;
