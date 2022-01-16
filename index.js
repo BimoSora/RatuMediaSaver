@@ -61,55 +61,56 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
 })
 
 bot.command('yt', (ctx) => {
-  console.log(ctx)
-  let message_id = ctx.id;
-  let args =  ctx.text.split(' ');
-  let url = args[1];
-  let mention = `@${ctx.from.username}`;
-  var dq = "2160";
-  let allowed_qualities = ['144','240','360','480','720','1080','1440','2160'];
-  if(!url.match(/^(?:https?:)?(?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]{7,15})(?:[\?&][a-zA-Z0-9\_-]+=[a-zA-Z0-9\_-]+)*(?:[&\/\#].*)?$/)) return ctx.telegram.sendMessage(ctx.chat.id,"Enter a valid youtube url",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
-  if(args[2] && allowed_qualities.includes(args[2])){
-    var dq = `${args[2]}`
-    ctx.telegram.sendMessage(ctx.chat.id,"Processing your video with the chosen quality",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
-  }else if(!args[2]){
-    ctx.telegram.sendMessage(ctx.chat.id,"Processing your video with max quality",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
-  }else if(args[2] && !allowed_qualities.includes(args[2])){
-    ctx.telegram.sendMessage(ctx.chat.id,"Invalid quality settings chosen , video will be downloaded with highest possible quality",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
-  }
-  if(ctx.from.username == undefined){
-     mention = ctx.from.first_name
-  }
-  try{
-    youtubedl(url, {
-      format: `bestvideo[height<=${dq}]+bestaudio/best[height<=${dq}]`,
-      dumpSingleJson: true,
-      noWarnings: true,
-      noCallHome: true,
-      noCheckCertificate: true,
-      preferFreeFormats: true,
-      youtubeSkipDashManifest: true,
-    }).then(async output => {
-        const filename = `${output.title}.mp4`
-        await ctx.telegram.sendMessage(ctx.chat.id,`Upload start!`)
-        const buffer = []
-        const stream = got.stream(output.requested_formats[0].url)
-        stream
-        .on('error', () => ctx.telegram.sendMessage(ctx.chat.id, 'An error has occurred'))
-        .on('progress', p => console.log(p))
-        .on('data', chunk => buffer.push(chunk))
-        .on('end', async () => {
-          await ctx.telegram.sendDocument(ctx.chat.id,Buffer.concat(buffer),{
-            fileName : filename
-          })
-          await ctx.telegram.sendMessage(ctx.chat.id,`${filename}`)
-          await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
-        })
-      })
-    }catch (error) {
-          console.error(error);
-          ctx.telegram.sendMessage(ctx.chat.id,"***Error occurred, Make sure your sent a correct URL***",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
+  if(ctx.from.id == Number(process.env.ADMIN) || ctx.from.id == Number(process.env.ADMIN1) || ctx.from.id == Number(process.env.ADMIN2) || ctx.from.id == Number(process.env.ADMIN3) || ctx.from.id == Number(process.env.ADMIN4)){
+    let message_id = ctx.id;
+    let args =  ctx.text.split(' ');
+    let url = args[1];
+    let mention = `@${ctx.from.username}`;
+    var dq = "2160";
+    let allowed_qualities = ['144','240','360','480','720','1080','1440','2160'];
+    if(!url.match(/^(?:https?:)?(?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]{7,15})(?:[\?&][a-zA-Z0-9\_-]+=[a-zA-Z0-9\_-]+)*(?:[&\/\#].*)?$/)) return ctx.telegram.sendMessage(ctx.chat.id,"Enter a valid youtube url",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
+    if(args[2] && allowed_qualities.includes(args[2])){
+      var dq = `${args[2]}`
+      ctx.telegram.sendMessage(ctx.chat.id,"Processing your video with the chosen quality",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
+    }else if(!args[2]){
+      ctx.telegram.sendMessage(ctx.chat.id,"Processing your video with max quality",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
+    }else if(args[2] && !allowed_qualities.includes(args[2])){
+      ctx.telegram.sendMessage(ctx.chat.id,"Invalid quality settings chosen , video will be downloaded with highest possible quality",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
     }
+    if(ctx.from.username == undefined){
+      mention = ctx.from.first_name
+    }
+    try{
+      youtubedl(url, {
+        format: `bestvideo[height<=${dq}]+bestaudio/best[height<=${dq}]`,
+        dumpSingleJson: true,
+        noWarnings: true,
+        noCallHome: true,
+        noCheckCertificate: true,
+        preferFreeFormats: true,
+        youtubeSkipDashManifest: true,
+      }).then(async output => {
+          const filename = `${output.title}.mp4`
+          await ctx.telegram.sendMessage(ctx.chat.id,`Upload start!`)
+          const buffer = []
+          const stream = got.stream(output.requested_formats[0].url)
+          stream
+          .on('error', () => ctx.telegram.sendMessage(ctx.chat.id, 'An error has occurred'))
+          .on('progress', p => console.log(p))
+          .on('data', chunk => buffer.push(chunk))
+          .on('end', async () => {
+            await ctx.telegram.sendDocument(ctx.chat.id,Buffer.concat(buffer),{
+              fileName : filename
+            })
+            await ctx.telegram.sendMessage(ctx.chat.id,`${filename}`)
+            await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
+          })
+        })
+      }catch (error) {
+            console.error(error);
+            ctx.telegram.sendMessage(ctx.chat.id,"***Error occurred, Make sure your sent a correct URL***",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
+      }
+  }
 })
 
 bot.run()
