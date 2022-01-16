@@ -100,7 +100,8 @@ bot.command('yt', (ctx) => {
         .on('data', chunk => buffer.push(chunk))
         .on('end', async () => {
           await ctx.telegram.sendDocument(ctx.chat.id,Buffer.concat(buffer),{
-            fileName : filename
+            fileName : filename,
+            caption : `${filename}`
           })
           await ctx.telegram.sendMessage(ctx.chat.id,`${filename}`)
           await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
@@ -111,6 +112,5 @@ bot.command('yt', (ctx) => {
           ctx.telegram.sendMessage(ctx.chat.id,"***Error occurred, Make sure your sent a correct URL***",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
     }
 })
-
 
 bot.run()
