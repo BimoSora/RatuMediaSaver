@@ -85,6 +85,7 @@ bot.command('yt', (ctx) => {
       format: `bestvideo[height<=${dq}]+bestaudio/best[height<=${dq}]`,
       dumpSingleJson: true,
       noWarnings: true,
+      getTitle: true,
       noCallHome: true,
       noCheckCertificate: true,
       preferFreeFormats: true,
