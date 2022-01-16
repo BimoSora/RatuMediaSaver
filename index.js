@@ -89,7 +89,7 @@ bot.command('yt', (ctx) => {
       noCheckCertificate: true,
       preferFreeFormats: true,
       youtubeSkipDashManifest: true,
-    }).then(output => ctx.telegram.sendMessage(ctx.chat.id,`***Title: ${output.title} ***\n[Download Link](${output.requested_formats[0].url})\n***Video Requested By: [${mention}]***`,{ replyToMsgId: message_id , parse_mode: 'Markdown'}))
+    }).then(output => ctx.telegram.sendMessage(ctx.chat.id,`***Title: ${output.title} ***\n[Download Link] ${output.requested_formats[0].url} \n***Video Requested By: [${mention}]***`,{ replyToMsgId: message_id , parse_mode: 'Markdown'}))
     }catch (error) {
           console.error(error);
           ctx.telegram.sendMessage(ctx.chat.id,"***Error occurred, Make sure your sent a correct URL***",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
