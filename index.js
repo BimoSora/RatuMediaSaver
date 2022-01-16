@@ -2,7 +2,6 @@
 require('dotenv').config();
 const {Snake} = require("tgsnake");
 const got = require('got');
-
 const youtubedl = require('youtube-dl-exec');
 
 const bot = new Snake({
