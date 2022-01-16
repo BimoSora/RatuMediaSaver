@@ -76,13 +76,13 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
               await ctx.telegram.sendDocument(ctx.chat.id,Buffer.concat(buffer),{
                 fileName : filename
               })
-              await ctx.telegram.sendMessage(ctx.chat.id,`${filename}`)
+              await ctx.telegram.sendMessage(ctx.chat.id,filename)
               await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
             })
           })
         }catch (error) {
-              console.error(error);
-              ctx.telegram.sendMessage(ctx.chat.id,"***Error occurred, Make sure your sent a correct URL***",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
+          console.error(error);
+          ctx.telegram.sendMessage(ctx.chat.id,"***Error occurred, Make sure your sent a correct URL***",{ replyToMsgId: message_id , parse_mode: 'Markdown'})
       }
 
     }else{
@@ -108,9 +108,10 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,""),async (ctx) => 
           await ctx.telegram.sendDocument(ctx.chat.id,Buffer.concat(buffer),{
             fileName : filename
           })
-          await ctx.telegram.sendMessage(ctx.chat.id,`Name: ${filename}`)
+          await ctx.telegram.sendMessage(ctx.chat.id,filename)
           await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
         })
+
       }
     }
   }
