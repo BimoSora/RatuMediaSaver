@@ -65,7 +65,6 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
           youtubeSkipDashManifest: true,
         }).then(async output => {
           const filename = `${output.title}.mp4`
-          ctx.telegram.sendMessage(ctx.chat.id,'Processing your file',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
           await ctx.telegram.sendMessage(ctx.chat.id,`Upload start!`)
           const buffer = []
           const stream = got.stream(output.requested_formats[0].url)
@@ -98,6 +97,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
         if(doctext3 == doctext4){
           await ctx.telegram.sendMessage(ctx.chat.id,`Exstension not found`,{ replyToMsgId: message_id , parse_mode: 'Markdown'})
         }else{
+          ctx.telegram.sendMessage(ctx.chat.id,'Processing your file',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
           await ctx.telegram.sendMessage(ctx.chat.id,`Upload start!`)
           const buffer = []
           const stream = got.stream(url)
