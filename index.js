@@ -81,7 +81,7 @@ bot.command('yt', (ctx) => {
      mention = ctx.from.first_name
   }
   try{
-    youtubedl(--write-thumbnail, url, {
+    youtubedl(write-thumbnail, url, {
       format: `bestvideo[height<=${dq}]+bestaudio/best[height<=${dq}]`,
       dumpSingleJson: true,
       noWarnings: true,
