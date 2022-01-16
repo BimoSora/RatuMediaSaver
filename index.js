@@ -102,7 +102,7 @@ bot.command('yt', (ctx) => {
           await ctx.telegram.sendDocument(ctx.chat.id,Buffer.concat(buffer),{
             fileName : filename
           })
-          await ctx.telegram.sendMessage(ctx.chat.id,`Name: ${filename}`)
+          await ctx.telegram.sendMessage(ctx.chat.id,`${filename}`)
           await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
         })
       })
