@@ -31,7 +31,7 @@ function fromid(ctx){
 bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => {
   if(ctx.from.id == Number(process.env.ADMIN) || ctx.from.id == Number(process.env.ADMIN1) || ctx.from.id == Number(process.env.ADMIN2) || ctx.from.id == Number(process.env.ADMIN3) || ctx.from.id == Number(process.env.ADMIN4)){
     const url = ctx.text.replace('/url', '').trim();
-    const regex = /youtube.com|youtu.be/g;
+    const regex = /youtube.com|youtu.be|instagram.com/g;
     const found = url.match(regex);
 
     let message_id = ctx.id;
@@ -82,8 +82,23 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
         })
       }catch (error) {
         console.error(error);
-        ctx.telegram.sendMessage(ctx.chat.id,'***Error occurred, Make sure your sent a correct URL***',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
+        await ctx.telegram.sendMessage(ctx.chat.id,'***Error occurred, Make sure your sent a correct URL***',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
       }
+
+    }else if(found == 'instagram.com'){
+
+      const { URL } = require('url');
+      const myURL = new URL(`${url}`);
+    
+      myURL.search = 'media?size=l';
+      var myURL2 = myURL.href;
+      
+      require('request').get(`https://api.instagram.com/oembed/?url=${myURL}`, (error, response, body) => {
+        if (!error && response.statusCode === 200) {
+          var resp = JSON.parse(body);
+          await ctx.telegram.sendMessage(ctx.chat.id, myURL2);
+        }
+      })
 
     }else{
 
@@ -114,7 +129,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
         }
       }catch (error) {
         console.error(error);
-        ctx.telegram.sendMessage(ctx.chat.id,'***Error occurred, Make sure your sent a correct URL***',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
+        await ctx.telegram.sendMessage(ctx.chat.id,'***Error occurred, Make sure your sent a correct URL***',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
       }
     }
   }
