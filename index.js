@@ -93,7 +93,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
       myURL.search = 'media?size=l';
       var myURL2 = myURL.href;
       
-      require('request').get(`https://api.instagram.com/oembed/?url=${myURL}`, (error, response, body) => {
+      require('request').get(`https://api.instagram.com/oembed/?url=${myURL}`, async (error, response, body) => {
         if (!error && response.statusCode === 200) {
           var resp = JSON.parse(body);
           await ctx.telegram.sendMessage(ctx.chat.id, myURL2);
