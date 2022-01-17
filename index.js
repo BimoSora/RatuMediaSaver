@@ -89,7 +89,6 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
     }else if(found == 'instagram.com'){
 
     get(`https://api.instagram.com/oembed/?url=${url}`).asString(function(err, data) {
-        if (err) throw err;
         console.log(data);
     });
 
