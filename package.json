@@ -7,6 +7,7 @@
     "dotenv": "^11.0.0",
     "get": "^1.4.0",
     "got": "11.8.3",
+    "request": "^2.88.2",
     "tgsnake": "./tgsnake-dev-build.tgz",
     "youtube-dl": "^3.5.0",
     "youtube-dl-exec": "^2.0.2"
