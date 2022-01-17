@@ -549,6 +549,11 @@ get-symbol-description@^1.0.0:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
 
+get@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/get/-/get-1.4.0.tgz#5de87b935839d755a17964773cc35e41ee33cd57"
+  integrity sha1-Xeh7k1g511WheWR3PMNeQe4zzVc=
+
 got@11.8.3, got@~11.8.1:
   version "11.8.3"
   resolved "https://registry.yarnpkg.com/got/-/got-11.8.3.tgz#f496c8fdda5d729a90b4905d2b07dbd148170770"
