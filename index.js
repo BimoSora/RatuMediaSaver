@@ -2,7 +2,7 @@
 require('dotenv').config();
 const {Snake} = require('tgsnake');
 const got = require('got');
-var get = require('get');
+const get = require('get');
 const youtubedl = require('youtube-dl-exec');
 
 const bot = new Snake({
@@ -88,7 +88,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
 
     }else if(found == 'instagram.com'){
 
-    get('https://api.instagram.com/oembed/?url=https://www.instagram.com/p/BdCbLmWAZR2/?taken-by=sayaka__714').asString(function(err, data) {
+    get(`https://api.instagram.com/oembed/?url=${url}`).asString(function(err, data) {
         if (err) throw err;
         console.log(data);
     });
