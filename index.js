@@ -93,7 +93,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
         console.log(body);
         if (!error && response.statusCode === 200) {
           var resp = JSON.parse(body);
-          ctx.telegram.sendDocument(ctx.chat.id,url});
+          ctx.telegram.sendDocument(ctx.chat.id,url);
         }
     });
 
