@@ -89,7 +89,13 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
 
     }else if(found == 'instagram.com'){
 
-    request.get(`https://api.instagram.com/oembed/?url=${url}`, function (error, response, body){
+    const { URL } = require('url');
+    const myURL = new URL(`${url}`);
+  
+    myURL.search = 'media?size=l';
+    var myURL2 = myURL.href;
+
+    request.get(`https://api.instagram.com/oembed/?url=${myURL2}`, function (error, response, body){
         console.log(body);
         if (!error && response.statusCode === 200) {
           var resp = JSON.parse(body);
