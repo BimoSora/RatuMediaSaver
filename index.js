@@ -2,8 +2,6 @@
 require('dotenv').config();
 const {Snake} = require('tgsnake');
 const got = require('got');
-const get = require('get');
-const request = require('request');
 const youtubedl = require('youtube-dl-exec');
 
 const bot = new Snake({
@@ -33,7 +31,7 @@ function fromid(ctx){
 bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => {
   if(ctx.from.id == Number(process.env.ADMIN) || ctx.from.id == Number(process.env.ADMIN1) || ctx.from.id == Number(process.env.ADMIN2) || ctx.from.id == Number(process.env.ADMIN3) || ctx.from.id == Number(process.env.ADMIN4)){
     const url = ctx.text.replace('/url', '').trim();
-    const regex = /youtube.com|youtu.be|instagram.com/g;
+    const regex = /youtube.com|youtu.be/g;
     const found = url.match(regex);
 
     let message_id = ctx.id;
@@ -87,22 +85,6 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
         await ctx.telegram.sendMessage(ctx.chat.id,'***Error occurred, Make sure your sent a correct URL***',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
       }
 
-    }else if(found == 'instagram.com'){
-
-    const { URL } = require('url');
-    const myURL = new URL(`${url}`);
-  
-    myURL.search = 'media?size=l';
-    var myURL2 = myURL.href;
-
-    request.get(`https://api.instagram.com/oembed/?url=${myURL2}`, function (error, response, body){
-        console.log(body);
-        if (!error && response.statusCode === 200) {
-          var resp = JSON.parse(body);
-          ctx.telegram.sendPhoto(ctx.chat.id,url);
-        }
-    });
-
     }else{
 
       const filename = url.split('/').pop()
@@ -112,6 +94,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
       var doctext4 = filename.replace(regex3, 'null');
 
   try{
+    
         if(doctext3 == doctext4){
           await ctx.telegram.sendMessage(ctx.chat.id,`Exstension not found`,{ replyToMsgId: message_id , parse_mode: 'Markdown'})
         }else{
