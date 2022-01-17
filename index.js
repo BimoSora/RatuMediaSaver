@@ -91,6 +91,10 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
 
     request.get(`https://api.instagram.com/oembed/?url=${url}`, function (error, response, body){
         console.log(body);
+        if (!error && response.statusCode === 200) {
+          var resp = JSON.parse(body);
+          await ctx.telegram.sendDocument(ctx.chat.id,url});
+        }
     });
 
     }else{
