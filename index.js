@@ -66,6 +66,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
           youtubeSkipDashManifest: true,
         }).then(async output => {
           const filename = `${output.title}.mp4`
+          const filename2 = `${output.title}`
           const buffer = []
           const stream = got.stream(output.requested_formats[0].url)
           stream
@@ -75,7 +76,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
           .on('end', async () => {
             await ctx.telegram.sendDocument(ctx.chat.id,Buffer.concat(buffer),{
               fileName : filename,
-              caption : filename
+              caption : filename2
             })
             await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
           })
