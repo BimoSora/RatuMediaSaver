@@ -97,15 +97,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
       var regex3 = /\.[A-Za-z0-9]+$/gm
       var doctext3 = filename.replace(regex3, '');
       var doctext4 = filename.replace(regex3, 'null');
-
-      const mapObj = {
-        jpeg: 'jpeg',
-        jpg: 'jpg',
-        png: 'png',
-        gif: 'gif',
-        svg: 'svg'
-      };
-      var photo = filename.replace(/\b(?:jpeg|jpg|png|gif|svg)\b/gi, matched => mapObj[matched]);
+      var photo = filename.replace(regex3, 'jpeg|jpg|png|gif|svg');
 
   try{
 
