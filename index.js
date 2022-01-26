@@ -97,13 +97,13 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
       var regex3 = /\.[A-Za-z0-9]+$/gm
       var doctext3 = filename.replace(regex3, '');
       var doctext4 = filename.replace(regex3, 'null');
-      var photo = doctext3 == 'jpeg' || doctext3 == 'jpg' || doctext3 == 'png' || doctext3 == 'jpeg' || doctext3 == 'gif' || doctext3 == 'svg' || doctext3 == 'webp';
+      var photo = 'jpeg' || 'jpg' || 'png' || 'jpeg' || 'gif' || 'svg' || 'webp';
 
   try{
 
         if(doctext3 == doctext4){
           await ctx.telegram.sendMessage(ctx.chat.id,`Exstension not found`,{ replyToMsgId: message_id , parse_mode: 'Markdown'})
-        }else if(photo){
+        }else if(doctext3 == photo){
           await ctx.telegram.sendMessage(ctx.chat.id,'Processing your file',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
           const buffer = []
           const stream = got.stream(url)
