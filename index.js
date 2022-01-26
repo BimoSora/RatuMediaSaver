@@ -97,7 +97,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
       var regex3 = /\.[A-Za-z0-9]+$/gm
       var doctext3 = filename.replace(regex3, '');
       var doctext4 = filename.replace(regex3, 'null');
-      var photo = /^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w].*))+(.jpeg|.jpg|.png|.jpeg|.gif|.svg|.webp)$/;
+      var photo = /^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w]*))+(jpeg|jpg|png|jpeg|gif|svg|webp)$/;
 
   try{
 
