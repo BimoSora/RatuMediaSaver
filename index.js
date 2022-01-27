@@ -98,7 +98,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
       var doctext3 = filename.replace(regex3, '');
       var doctext4 = filename.replace(regex3, 'null');
 
-      const words = filename.split('.');
+      const words = url.split('.');
       const words2 = words[2];
 
   try{
