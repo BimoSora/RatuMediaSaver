@@ -105,7 +105,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
         if(doctext3 == doctext4){
           await ctx.telegram.sendMessage(ctx.chat.id,`Exstension not found`,{ replyToMsgId: message_id , parse_mode: 'Markdown'})
         }else{
-          if(photo = photo2){
+          if(photo < photo2){
             await ctx.telegram.sendMessage(ctx.chat.id,'Processing your file',{ replyToMsgId: message_id , parse_mode: 'Markdown'})
             const buffer = []
             const stream = got.stream(url)
