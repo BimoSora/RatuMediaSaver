@@ -75,7 +75,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
           .on('progress', p => console.log(p))
           .on('data', chunk => buffer.push(chunk))
           .on('end', async () => {
-            bot.client.invoke(
+            await ctx.telegram.sendMedia(chatId,
               new Api.messages.SendMedia({
                 peer: ctx.chat.id,
                 media: Buffer.concat(buffer),
@@ -84,7 +84,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
                 entities: entities,
                 replyMarkup: replyMarkup
               })
-            );
+            )
             await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
           })
         })
