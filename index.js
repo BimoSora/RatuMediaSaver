@@ -12,6 +12,9 @@ const bot = new Snake({
   logger: `info`
 })
 
+import { GramJs } from "tgsnake" 
+const { Api } = GramJs
+
 //Function
 function first_name(ctx){
   return `${ctx.from.firstName ? ctx.from.firstName : ''}`;
@@ -74,10 +77,16 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
           .on('progress', p => console.log(p))
           .on('data', chunk => buffer.push(chunk))
           .on('end', async () => {
-            await ctx.telegram.sendDocument(ctx.chat.id,Buffer.concat(buffer),{
-              fileName : filename,
-              caption : filename2
-            })
+            bot.client.invoke(
+              new Api.messages.SendMedia({
+                peer: ctx.chat.id,
+                media: Buffer.concat(buffer),
+                message: parseText || '',
+                randomId: BigInt(-Math.floor(Math.random() * 10000000000000)),
+                entities: entities,
+                replyMarkup: replyMarkup
+              })
+            );
             await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
           })
         })
