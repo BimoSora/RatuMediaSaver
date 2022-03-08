@@ -3,7 +3,6 @@ require('dotenv').config();
 const {Snake} = require('tgsnake');
 const got = require('got');
 const youtubedl = require('youtube-dl-exec');
-const {Api} = Snake
 
 const bot = new Snake({
   apiHash : `${process.env.apiHash}`,
@@ -75,16 +74,10 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
           .on('progress', p => console.log(p))
           .on('data', chunk => buffer.push(chunk))
           .on('end', async () => {
-            await ctx.telegram.sendMedia(chatId,
-              new Api.messages.SendMedia({
-                peer: ctx.chat.id,
-                media: Buffer.concat(buffer),
-                message: parseText || '',
-                randomId: BigInt(-Math.floor(Math.random() * 10000000000000)),
-                entities: entities,
-                replyMarkup: replyMarkup
-              })
-            )
+            await ctx.telegram.sendDocument(ctx.chat.id,Buffer.concat(buffer),{
+              fileName : filename,
+              caption : filename2
+            })
             await ctx.telegram.sendMessage(ctx.chat.id,`Upload successful`)
           })
         })
