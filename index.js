@@ -3,6 +3,7 @@ require('dotenv').config();
 const {Snake} = require('tgsnake');
 const got = require('got');
 const youtubedl = require('youtube-dl-exec');
+const {Api} = Snake
 
 const bot = new Snake({
   apiHash : `${process.env.apiHash}`,
@@ -11,9 +12,6 @@ const bot = new Snake({
   tgSnakeLog : true,
   logger: `info`
 })
-
-import { GramJs } from "tgsnake" 
-const { Api } = GramJs
 
 //Function
 function first_name(ctx){
