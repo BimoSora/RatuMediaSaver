@@ -145,7 +145,7 @@ bot.hears(new RegExp(`^[${bot.prefix}](url) (https?:\/\/.*)`,''),async (ctx) => 
   }
 })
 
-b//ot.command('doc', async (ctx) => {
+//bot.command('doc', async (ctx) => {
 //  await ctx.sendDocument(document.fileId,{
 //    chatId: ctx.chat.id,
 //    caption : ctx.caption
